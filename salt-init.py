@@ -50,7 +50,16 @@ def main():
     time.sleep(timeToWaitBetweenAttempts)
   
   if(allMinionsPresent):
-    cmd=["sudo","salt","\'*\'","state.highstate"]
+  
+    #create a list of minions
+    minonsString="\'"
+    for i in range(len(expectedMinions)-1):
+      minonsString+=expectedMinions[i]+","
+    minonsString+=expectedMinions[len(expectedMinions)-1]+"\'"
+    
+    print("All minions present, sending command to go to highstate")
+  
+    cmd=["sudo","salt","-L",minonsString,"state.highstate"]
     process=Popen(cmd,stdout=PIPE,stderr=PIPE)
     stdout,stderr=process.communicate()
     print(stdout)
