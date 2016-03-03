@@ -12,9 +12,6 @@ def parseOptions():
     ,version="%prog 1.0",description="waits for all expected minions to connect"
     +" then then provisions them with salt")
   
-  #add options
-  addParserOptions(parser)
-  
   #parse command line options
   return parser.parse_args()
 def main():
