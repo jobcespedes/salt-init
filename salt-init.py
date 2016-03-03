@@ -3,7 +3,7 @@ from __future__ import print_function
 from subprocess import Popen, PIPE
 import time
 import optparse as op
-def parseOptions(actions):
+def parseOptions():
   """Parses command line options
   
   """
@@ -20,7 +20,7 @@ def parseOptions(actions):
 def main():
   
   #parse command line options
-  (options,args)=parseOptions(actions)
+  (options,args)=parseOptions()
 
   expectedMinions=args
   
