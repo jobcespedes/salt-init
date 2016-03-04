@@ -59,7 +59,7 @@ def main():
       break
     
     print("only minions "+str(minions)+" present expecting "
-      +str(expectedMinion)+" minions. Waiting another "
+      +str(expectedMinions)+" minions. Waiting another "
       +str(timeToWaitBetweenAttempts)+" seconds and trying again")
     
     #increment count
