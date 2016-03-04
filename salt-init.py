@@ -39,9 +39,8 @@ def main():
     process=Popen(cmd,stdout=PIPE,stderr=PIPE)
     stdout,stderr=process.communicate()
     returnCode=process.returncode
-    print("stderr "+str(stderr))
     minions=[]
-    if(stdout!="No minions matched the target. No command was sent, no jid was assigned."):
+    if(stdout[0]=="-"):
     
       namestemp=stdout.split()
       for name in namestemp:
