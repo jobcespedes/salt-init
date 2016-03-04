@@ -9,34 +9,34 @@ def parseOptions():
   
   """
   
-  parser=op.OptionParser(usage="Usage: %prog [options] EXPECTEDMINIONS EXPECTEDMINIONSIPS"
+  parser=op.OptionParser(usage="Usage: %prog [options] EXPECTEDMINIONS"
     ,version="%prog 1.0",description="waits for all expected minions to connect"
     +" then then provisions them with salt")
   
   #parse command line options
   return parser.parse_args()
-def isStrAnIp(string):
-  pattern=re.compile("[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}")
-  return pattern.match(string)
+#def isStrAnIp(string):
+#  pattern=re.compile("[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}")
+#  return pattern.match(string)
 def main():
   
   #parse command line options
   (options,args)=parseOptions()
   
-  minionIps=[]
-  minionHostNames=[]
-  for arg in args:
-    if isStrAnIP(arg):
-      minionIps.append(arg)
-    else: 
-      minionHostNames.append(arg)
+  #minionIps=[]
+  #minionHostNames=[]
+  #for arg in args:
+  #  if isStrAnIP(arg):
+  #    minionIps.append(arg)
+  #  else: 
+  #    minionHostNames.append(arg)
       
   #check that minion host names and IPs are the same length
   #if len(minionIPs)!=len(minionHostNames):
   #  raise Exception("Do not have same number of minion IPs "+str(minionIPS)
   #    +" as minion host names "+str(minionHostNames))
   
-  expectedMinions=minionHostNames
+  expectedMinions=args
   
   #TODO: try pinging each minion => I can't get the ip-address before the 
   #machines are booted (i.e. when I inject the cloudInit script). Which means if
