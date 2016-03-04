@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from __future__ import print_function
-from subprocess import Popen, PIPE
+from subprocess import Popen, PIPE,list2cmdline
 import time
 import optparse as op
 
@@ -54,11 +54,13 @@ def main():
     #get list of salt minions
     process=Popen(cmd,stdout=PIPE,stderr=PIPE)
     stdout,stderr=process.communicate()
-    namestemp=stdout.split()
     minions=[]
-    for name in namestemp:
-      if name!="-":
-        minions.append(name)
+    if(stdout!="No minions matched the target No command was sent no jid was assigned"):
+    
+      namestemp=stdout.split()
+      for name in namestemp:
+        if name!="-":
+          minions.append(name)
     
     #see if all expected minions present
     allMinionsPresent=True
@@ -93,10 +95,11 @@ def main():
     
     #run high state command
     cmd=["sudo","salt","-L",minonsString,"state.highstate"]
+    print(list2cmdline(cmd))
     process=Popen(cmd,stdout=PIPE,stderr=PIPE)
     stdout,stderr=process.communicate()
     print(stdout)
-    #print(stderr)
+    print(stderr)
     
     #TODO: should also now disable accept all keys as we have all that we want
   else:
