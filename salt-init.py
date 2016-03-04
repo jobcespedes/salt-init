@@ -66,6 +66,14 @@ def main():
       if expectedMinion not in minions:
         allMinionsPresent=False
     
+    #don't need to wait if all minions are present
+    if allMinionsPresent:
+      break
+    
+    print("only minions "+str(minions)+" present expecting "
+      +str(expectedMinion)+" minions. Waiting another "
+      +str(timeToWaitBetweenAttempts)+" seconds and trying again")
+    
     #increment count
     count+=1
     
