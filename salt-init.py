@@ -85,10 +85,10 @@ def main():
   if(allMinionsPresent):
   
     #create a list of minions
-    minonsString="\'"
+    minonsString="\""
     for i in range(len(expectedMinions)-1):
       minonsString+=expectedMinions[i]+","
-    minonsString+=expectedMinions[len(expectedMinions)-1]+"\'"
+    minonsString+=expectedMinions[len(expectedMinions)-1]+"\""
     
     print("All minions present, sending command to go to highstate for "
       +minonsString)
