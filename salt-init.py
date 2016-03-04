@@ -15,26 +15,10 @@ def parseOptions():
   
   #parse command line options
   return parser.parse_args()
-#def isStrAnIp(string):
-#  pattern=re.compile("[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}")
-#  return pattern.match(string)
 def main():
   
   #parse command line options
   (options,args)=parseOptions()
-  
-  #minionIps=[]
-  #minionHostNames=[]
-  #for arg in args:
-  #  if isStrAnIP(arg):
-  #    minionIps.append(arg)
-  #  else: 
-  #    minionHostNames.append(arg)
-      
-  #check that minion host names and IPs are the same length
-  #if len(minionIPs)!=len(minionHostNames):
-  #  raise Exception("Do not have same number of minion IPs "+str(minionIPS)
-  #    +" as minion host names "+str(minionHostNames))
   
   expectedMinions=args
   
@@ -44,7 +28,7 @@ def main():
   #OpenStack python API, which would then require the OpenStack rc file and 
   #password... arg.
   
-  maxAttempts=100
+  maxAttempts=25*len(expectedMinions)
   timeToWaitBetweenAttempts=10
   count=0
   allMinionsPresent=False
@@ -98,13 +82,13 @@ def main():
     print(list2cmdline(cmd))
     process=Popen(cmd,stdout=PIPE,stderr=PIPE)
     stdout,stderr=process.communicate()
-    print(stdout)
-    print(stderr)
+    logFile=open("/tmp/salt-init/log.txt",'w')
+    logFile.write(stdout)
+    logFile.write(stderr)
+    logFile.close()
     
     #TODO: should also now disable accept all keys as we have all that we want
   else:
-    #TODO: seems even failed ssh's into missing minions allows them to suddenly 
-    #be detected, maybe I should try pining them
     print("Not all expected minions present after "+str(maxAttempts)
       +" checks every "+str(timeToWaitBetweenAttempts)+" seconds. Not "
       +"executing \"salt '*' state.highstate\". Check that all expected "
