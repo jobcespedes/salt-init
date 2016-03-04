@@ -88,7 +88,8 @@ def main():
       minonsString+=expectedMinions[i]+","
     minonsString+=expectedMinions[len(expectedMinions)-1]+"\'"
     
-    print("All minions present, sending command to go to highstate")
+    print("All minions present, sending command to go to highstate for "
+      +minonsString)
     
     #run high state command
     cmd=["sudo","salt","-L",minonsString,"state.highstate"]
