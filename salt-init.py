@@ -38,8 +38,10 @@ def main():
     #get list of salt minions
     process=Popen(cmd,stdout=PIPE,stderr=PIPE)
     stdout,stderr=process.communicate()
+    returnCode=process.returncode
+    print("got return code "+str(returnCode))
     minions=[]
-    if(stdout!="No minions matched the target No command was sent no jid was assigned"):
+    if(stdout!="No minions matched the target. No command was sent, no jid was assigned."):
     
       namestemp=stdout.split()
       for name in namestemp:
