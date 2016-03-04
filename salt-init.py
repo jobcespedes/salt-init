@@ -32,13 +32,17 @@ def main():
       minionHostNames.append(arg)
       
   #check that minion host names and IPs are the same length
-  if len(minionIPs)!=len(minionHostNames):
-    raise Exception("Do not have same number of minion IPs "+str(minionIPS)
-      +" as minion host names "+str(minionHostNames))
+  #if len(minionIPs)!=len(minionHostNames):
+  #  raise Exception("Do not have same number of minion IPs "+str(minionIPS)
+  #    +" as minion host names "+str(minionHostNames))
   
   expectedMinions=minionHostNames
   
-  #TODO: try pining each minion
+  #TODO: try pinging each minion => I can't get the ip-address before the 
+  #machines are booted (i.e. when I inject the cloudInit script). Which means if
+  #I wanted to get the ips here, I would have to query them here using the 
+  #OpenStack python API, which would then require the OpenStack rc file and 
+  #password... arg.
   
   maxAttempts=100
   timeToWaitBetweenAttempts=10
