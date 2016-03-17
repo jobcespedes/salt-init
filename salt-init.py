@@ -40,22 +40,23 @@ def main():
     stdout,stderr=process.communicate()
     returnCode=process.returncode
     minions=[]
-    if(stdout[0]=="-"):
-    
-      namestemp=stdout.split()
-      for name in namestemp:
-        if name!="-":
-          minions.append(name)
-    
-    #see if all expected minions present
-    allMinionsPresent=True
-    for expectedMinion in expectedMinions:
-      if expectedMinion not in minions:
-        allMinionsPresent=False
-    
-    #don't need to wait if all minions are present
-    if allMinionsPresent:
-      break
+    if len(stdout)>0:
+      if(stdout[0]=="-"):
+      
+        namestemp=stdout.split()
+        for name in namestemp:
+          if name!="-":
+            minions.append(name)
+      
+      #see if all expected minions present
+      allMinionsPresent=True
+      for expectedMinion in expectedMinions:
+        if expectedMinion not in minions:
+          allMinionsPresent=False
+      
+      #don't need to wait if all minions are present
+      if allMinionsPresent:
+        break
     
     print("only minions "+str(minions)+" present expecting "
       +str(expectedMinions)+" minions. Waiting another "
