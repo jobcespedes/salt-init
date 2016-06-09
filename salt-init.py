@@ -23,7 +23,7 @@ def createMinionList(args):
   
   minionLists.append(masterName)
   for i in range(numSlaves):
-    minionLists.append(slaveBaseName+str(numSlaves))
+    minionLists.append(slaveBaseName+str(i))
   return minionLists
 def main():
   
