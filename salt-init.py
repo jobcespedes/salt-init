@@ -9,18 +9,28 @@ def parseOptions():
   
   """
   
-  parser=op.OptionParser(usage="Usage: %prog [options] EXPECTEDMINIONS"
+  parser=op.OptionParser(usage="Usage: %prog [options] MASTERNAME SLAVENAMEBASE NUMSLAVES"
     ,version="%prog 1.0",description="waits for all expected minions to connect"
     +" then then provisions them with salt")
   
   #parse command line options
   return parser.parse_args()
+def createMinionList(args):
+  masterName=ags[0]
+  slaveBaseName=args[1]
+  numSlaves=int(args[2])
+  minionLists=[]
+  
+  minionLists.append(masterName)
+  for i in range(numSlaves):
+    minionLists.append(slaveBaseName+str(numSlaves))
+  return minionLists
 def main():
   
   #parse command line options
   (options,args)=parseOptions()
   
-  expectedMinions=args
+  expectedMinions=createMinionList(args)
   
   #TODO: try pinging each minion => I can't get the ip-address before the 
   #machines are booted (i.e. when I inject the cloudInit script). Which means if
