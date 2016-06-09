@@ -16,7 +16,7 @@ def parseOptions():
   #parse command line options
   return parser.parse_args()
 def createMinionList(args):
-  masterName=ags[0]
+  masterName=args[0]
   slaveBaseName=args[1]
   numSlaves=int(args[2])
   minionLists=[]
