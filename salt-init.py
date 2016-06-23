@@ -94,9 +94,12 @@ def main():
     print(list2cmdline(cmd))
     process=Popen(cmd,stdout=PIPE,stderr=PIPE)
     stdout,stderr=process.communicate()
+    returnCode=process.returncode
     logFile=open("/tmp/salt-init/log.txt",'w')
     logFile.write(stdout)
     logFile.write(stderr)
+    logFile.write("process finished with return code \""+str(returnCode)+"\"")
+    print("process finished with return code \""+str(returnCode)+"\"")
     logFile.close()
     
     #TODO: should also now disable accept all keys as we have all that we want
