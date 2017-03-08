@@ -80,7 +80,7 @@ def main():
       +minonsString)
     
     #run high state command
-    cmd=["sudo","salt","-L",minonsString,"state.highstate"]
+    cmd=["sudo","salt","-b","4","-L",minonsString,"state.highstate"]
     print(list2cmdline(cmd))
     process=Popen(cmd,stdout=PIPE,stderr=PIPE)
     stdout,stderr=process.communicate()
