@@ -21,9 +21,9 @@ def createMinionList(args):
   numSlaves=int(args[2])
   minionLists=[]
   
-  minionLists.append(masterName)
+  minionLists.append(masterName+'.localdomain')
   for i in range(numSlaves):
-    minionLists.append(slaveBaseName+str(i))
+    minionLists.append(slaveBaseName+str(i)+'.localdomain')
   return minionLists
 def main():
   
